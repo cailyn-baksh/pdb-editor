@@ -3,9 +3,17 @@
 	<head>
 		<title>pdb-edit</title>
 
-		<link rel="stylesheet" href="style/menu.css" />
+		<link rel="stylesheet" href="/style/menu.css" />
+		<link rel="stylesheet" href="/style/tabs.css" />
 
-		<script src="js/editor.js"></script>
+		<script src="/js/editor.js"></script>
+
+		<style>
+			body {
+				margin: 0;
+			}
+		</style>
+
 		<script>
 			if (!window.localStorage.getItem("theme")) {
 				window.localStorage.setItem("theme", "light");
@@ -13,6 +21,14 @@
 
 			function selectTheme() {
 				document.body.classList += window.localStorage.getItem("theme");
+			}
+
+			function tabBarDropHandler(e) {
+				e.preventDefault();
+			}
+
+			function tabBarDragOverHandler(e) {
+				e.preventDefault();
 			}
 		</script>
 	</head>
@@ -22,6 +38,7 @@
 				<li>
 					<span class="accelerator">F</span>ile
 					<ul>
+						<li><span class="text"><span class="accelerator">N</span>ew File</span><span class="shortcut">Ctrl-N</span></li>
 						<li><span class="text"><span class="accelerator">O</span>pen</span><span class="shortcut">Ctrl-O</span></li>
 						<li><span class="text"><span class="accelerator">S</span>ave</span><span class="shortcut">Ctrl-S</span></li>
 						<li class="separator"></li>
@@ -55,6 +72,13 @@
 				</li>
 			</ul>
 		</div>
-		<div id="editor" contenteditable="true"></div>
+		<div id="tabs" ondrop="tabBarDropHandler(event);" ondragover="tabBarDragOverHandler(event);">
+			<div class="tab" title="example.pdb">
+				<span class="filename">example.pdb</span>
+				<span class="closebtn">&cross;</span>
+			</div>
+		</div>
+		<div id="editor"></div>
 	</body>
 </html>
+

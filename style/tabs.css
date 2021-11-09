@@ -1,0 +1,31 @@
+@import "/style/themes.css";
+
+div#tabs {
+	background-color: var(--tabs-bg-color);
+	height: 50px;
+	max-height: 50px;
+}
+
+div#tabs div.tab {
+	width: 150px;
+	max-width: 150px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	position: relative;
+	padding: 0px 5px;
+	cursor: pointer;
+	background-color: var(--tab-bg-color);
+}
+
+div#tabs div.tab span.filename {
+	float: left;
+	display: inline-block;
+	max-width: 125px;
+	mask-size: 125px;
+	mask-image: linear-gradient(90deg, #000f 75%, transparent);
+}
+
+div#tabs div.tab span.closebtn {
+	float: right;
+}

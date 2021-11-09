@@ -6,6 +6,9 @@ body.light {
 	--menu-hover-bg-color: #aaa;
 	--menu-shortcut-text-color: #444;
 	--menu-separator-color: #bbb;
+
+	--tabs-bg-color: #eee;
+	--tab-bg-color: #bbb;
 }
 
 /* Dark Theme */
@@ -16,4 +19,7 @@ body.dark {
 	--menu-hover-bg-color: #777;
 	--menu-shortcut-text-color: #bbb;
 	--menu-separator-color: #666;
+
+	--tabs-bg-color: #666;
+	--tab-bg-color: #444;
 }

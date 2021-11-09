@@ -2,10 +2,11 @@
 
 div#menu {
 	margin: 0;
-	position: fixed;
+	position: relative;
 	top: 0;
 	left: 0;
-	right: 0;
+	width: 100vw;
+	display: table;
 	background-color: var(--menu-bg-color);
 }
 
@@ -38,6 +39,7 @@ div#menu ul {
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
+	display: table-row;
 }
 
 div#menu li:not(.separator):hover {
@@ -58,12 +60,13 @@ div#menu > ul > li {
 
 div#menu > ul > li > ul {
 	display: none;
+	position: absolute;
 	box-shadow: 2px 2px 1px #222;
+	z-index: 1000;
 }
 
 div#menu > ul > li:hover > ul {
 	display: block;
-	position: absolute;
 	margin-top: 5px;
 	background-color: var(--menu-bg-color);
 	margin-left: -5px;
