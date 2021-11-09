@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>pdb-edit</title>
+
+		<link rel="stylesheet" href="style/menu.css" />
+
+		<script src="js/editor.js"></script>
+		<script>
+			if (!window.localStorage.getItem("theme")) {
+				window.localStorage.setItem("theme", "light");
+			}
+
+			function selectTheme() {
+				document.body.classList += window.localStorage.getItem("theme");
+			}
+		</script>
+	</head>
+	<body onload="selectTheme();">
+		<div id="menu">
+			<ul>
+				<li>
+					<span class="accelerator">F</span>ile
+					<ul>
+						<li><span class="text"><span class="accelerator">O</span>pen</span><span class="shortcut">Ctrl-O</span></li>
+						<li><span class="text"><span class="accelerator">S</span>ave</span><span class="shortcut">Ctrl-S</span></li>
+						<li class="separator"></li>
+						<li><span class="text"><span class="accelerator">P</span>references</span></li>
+					</ul>
+				</li>
+				<li>
+					<span class="accelerator">E</span>dit
+					<ul>
+						<li><span class="text"><span class="accelerator">U</span>ndo</span><span class="shortcut">Ctrl-Z</span></li>
+						<li><span class="text"><span class="accelerator">R</span>edo</span><span class="shortcut">Ctrl-Shift-Z</span></li>
+						<li class="separator"></li>
+						<li><span class="text">Cu<span class="accelerator">t</span></span><span class="shortcut">Ctrl-X</span></li>
+						<li><span class="text"><span class="accelerator">C</span>opy</span><span class="shortcut">Ctrl-C</span></li>
+						<li><span class="text"><span class="accelerator">P</span>aste</span><span class="shortcut">Ctrl-V</span></li>
+						<li class="separator"></li>
+						<li><span class="text"><span class="accelerator">F</span>ind</span><span class="shortcut">Ctrl-F</span></li>
+						<li><span class="text"><span class="accelerator">R</span>eplace</span><span class="shortcut">Ctrl-H</span></li>
+					</ul>
+				</li>
+				<li>
+					<span class="accelerator">H</span>elp
+					<ul>
+						<li><span class="text"><span class="accelerator">E</span>ditor Help</span><span class="shortcut">F1</span></li>
+						<li><span class="text">PDB <span class="accelerator">F</span>ormat Docs</span></li>
+						<li class="separator"></li>
+						<li><span class="text">Report a <span class="accelerator">B</span>ug</span></li>
+						<li><span class="text"><span class="accelerator">G</span>ithub Repo</span></li>
+						<li><span class="text"><a href="/LICENSE.txt" target="_blank"><span class="accelerator">L</span>icense</a></span></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div id="editor" contenteditable="true"></div>
+	</body>
+</html>

@@ -1,0 +1,82 @@
+@import "/style/themes.css";
+
+div#menu {
+	margin: 0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: var(--menu-bg-color);
+}
+
+div#menu a {
+	text-decoration: none;
+	color: var(--text-color);
+}
+
+div#menu.show-accelerators span.accelerator {
+	text-decoration: underline;
+}
+
+div#menu li {
+	height: auto;
+	overflow: hidden;
+}
+
+div#menu li > span.text {
+	float: left;
+	margin-right: 35px;
+	color: var(--text-color);
+}
+
+div#menu li > span.shortcut {
+	float: right;
+	color: var(--menu-shortcut-text-color);
+}
+
+div#menu ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+div#menu li:not(.separator):hover {
+	background-color: var(--menu-hover-bg-color);
+}
+
+div#menu > ul {
+	position: relative;
+}
+
+div#menu > ul > li {
+	box-sizing: border-box;
+	float: left;
+	padding: 5px;
+	cursor: pointer;
+	background-color: var(--menu-bg-color);
+}
+
+div#menu > ul > li > ul {
+	display: none;
+	box-shadow: 2px 2px 1px #222;
+}
+
+div#menu > ul > li:hover > ul {
+	display: block;
+	position: absolute;
+	margin-top: 5px;
+	background-color: var(--menu-bg-color);
+	margin-left: -5px;
+}
+
+div#menu > ul > li > ul > li {
+	padding: 5px;
+	min-width: 100px;
+}
+
+div#menu > ul > li > ul > li.separator {
+	padding: 0;
+	padding-bottom: 2px;
+	border-bottom: 1px solid var(--menu-separator-color);
+	margin-bottom: 2px;
+}

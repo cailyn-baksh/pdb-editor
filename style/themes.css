@@ -1,0 +1,19 @@
+/* Light Theme */
+body.light {
+	--text-color: #000;
+
+	--menu-bg-color: #ddd;
+	--menu-hover-bg-color: #aaa;
+	--menu-shortcut-text-color: #444;
+	--menu-separator-color: #bbb;
+}
+
+/* Dark Theme */
+body.dark {
+	--text-color: #fff;
+
+	--menu-bg-color: #444;
+	--menu-hover-bg-color: #777;
+	--menu-shortcut-text-color: #bbb;
+	--menu-separator-color: #666;
+}
