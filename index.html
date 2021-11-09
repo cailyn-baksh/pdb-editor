@@ -30,6 +30,11 @@
 			function tabBarDragOverHandler(e) {
 				e.preventDefault();
 			}
+
+			document.addEventListener("DOMContentLoaded", () => {
+				let anchor = document.getElementById("report-bug");
+				anchor.href += `&body=Please leave this data at the end of your bug report%0A\`\`\`%0ATime: ${encodeURIComponent(new Date().toUTCString())}%0AUser-Agent: ${encodeURIComponent(navigator.userAgent).replace(/;/g, "%3B")}%0A\`\`\``.replace(/ /g, '+');
+			});
 		</script>
 	</head>
 	<body onload="selectTheme();">
@@ -65,8 +70,8 @@
 						<li><span class="text"><span class="accelerator">E</span>ditor Help</span><span class="shortcut">F1</span></li>
 						<li><span class="text">PDB <span class="accelerator">F</span>ormat Docs</span></li>
 						<li class="separator"></li>
-						<li><span class="text">Report a <span class="accelerator">B</span>ug</span></li>
-						<li><span class="text"><span class="accelerator">G</span>ithub Repo</span></li>
+						<li><span class="text"><a id="report-bug" href="https://github.com/cailyn-baksh/pdb-editor/issues/new?title=Bug+Report" target="_blank">Report a <span class="accelerator">B</span>ug</span></a></li>
+						<li><span class="text"><a href="https://github.com/cailyn-baksh/pdb-editor" target="_blank"><span class="accelerator">G</span>ithub Repo</span></a></li>
 						<li><span class="text"><a href="/LICENSE.txt" target="_blank"><span class="accelerator">L</span>icense</a></span></li>
 					</ul>
 				</li>
