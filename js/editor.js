@@ -14,7 +14,7 @@ class PDBEditor {
 	 */
 	async readFile(file) {
 		// TODO: read stream and buffer the file
-		this.#content = await file.text();
+		this.#content = await file.text().then(text => text.split('\n'));
 	}
 
 	createTabElement() {
@@ -82,6 +82,9 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	let tabs = document.getElementById("tabs");
 
 	// Load file on drag'n'drop
+	tabs.addEventListener("dragover", function(e) {
+		e.preventDefault();
+	});
 	tabs.addEventListener("drop", async function(e) {
 		e.preventDefault();
 

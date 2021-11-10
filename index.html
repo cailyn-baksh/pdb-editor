@@ -23,26 +23,6 @@
 				document.body.classList += window.localStorage.getItem("theme");
 			}
 
-			function tabBarDropHandler(e) {
-				e.preventDefault();
-
-				if (e.dataTransfer.items) {
-					for (let i=0; i < e.dataTransfer.items.length; ++i) {
-						if (e.dataTransfer.items[i].kind === "file") {
-							let file = e.dataTransfer.items[i].getAsFile();
-						}
-					}
-				} else {
-					for (let i=0; i < e.dataTransfer.files.length; ++i) {
-						let file = e.dataTransfer.files[i].name;
-					}
-				}
-			}
-
-			function tabBarDragOverHandler(e) {
-				e.preventDefault();
-			}
-
 			document.addEventListener("DOMContentLoaded", () => {
 				let anchor = document.getElementById("report-bug");
 				anchor.href += `&body=Please leave this data at the end of your bug report%0A\`\`\`%0ATime: ${encodeURIComponent(new Date().toUTCString())}%0AUser-Agent: ${encodeURIComponent(navigator.userAgent).replace(/;/g, "%3B")}%0A\`\`\``.replace(/ /g, '+');
@@ -89,8 +69,8 @@
 				</li>
 			</ul>
 		</div>
-		<div id="tabs" ondrop="tabBarDropHandler(event);" ondragover="tabBarDragOverHandler(event);"></div>
-		<div id="editor"></div>
+		<div id="tabs"></div>
+		<div id="editor" contenteditable="true"></div>
 	</body>
 </html>
 
