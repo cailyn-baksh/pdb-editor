@@ -4,28 +4,39 @@ div#tabs {
 	background-color: var(--tabs-bg-color);
 	height: 50px;
 	max-height: 50px;
+	overflow: hidden;
 }
 
 div#tabs div.tab {
-	width: 150px;
-	max-width: 150px;
+	width: 140px;
+	max-width: 140px;
 	height: 50px;
 	line-height: 50px;
 	text-align: center;
 	position: relative;
-	padding: 0px 5px;
+	padding: 0px 10px;
 	cursor: pointer;
+	float: left;
 	background-color: var(--tab-bg-color);
+}
+
+div#tabs div.tab.selected {
+	background-color: var(--tab-sel-bg-color);
+}
+
+div#tabs div.tab:not(:first-child) {
+	border-left: 1px solid var(--tab-sep-color);
 }
 
 div#tabs div.tab span.filename {
 	float: left;
 	display: inline-block;
-	max-width: 125px;
-	mask-size: 125px;
+	max-width: 115px;
+	mask-size: 115px;
 	mask-image: linear-gradient(90deg, #000f 75%, transparent);
 }
 
 div#tabs div.tab span.closebtn {
 	float: right;
+	font-family: monospace;
 }

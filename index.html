@@ -25,6 +25,18 @@
 
 			function tabBarDropHandler(e) {
 				e.preventDefault();
+
+				if (e.dataTransfer.items) {
+					for (let i=0; i < e.dataTransfer.items.length; ++i) {
+						if (e.dataTransfer.items[i].kind === "file") {
+							let file = e.dataTransfer.items[i].getAsFile();
+						}
+					}
+				} else {
+					for (let i=0; i < e.dataTransfer.files.length; ++i) {
+						let file = e.dataTransfer.files[i].name;
+					}
+				}
 			}
 
 			function tabBarDragOverHandler(e) {
@@ -43,7 +55,7 @@
 				<li>
 					<span class="accelerator">F</span>ile
 					<ul>
-						<li><span class="text"><span class="accelerator">N</span>ew File</span><span class="shortcut">Ctrl-N</span></li>
+						<li onclick="newFile();"><span class="text"><span class="accelerator">N</span>ew File</span><span class="shortcut">Ctrl-N</span></li>
 						<li><span class="text"><span class="accelerator">O</span>pen</span><span class="shortcut">Ctrl-O</span></li>
 						<li><span class="text"><span class="accelerator">S</span>ave</span><span class="shortcut">Ctrl-S</span></li>
 						<li class="separator"></li>
@@ -77,12 +89,7 @@
 				</li>
 			</ul>
 		</div>
-		<div id="tabs" ondrop="tabBarDropHandler(event);" ondragover="tabBarDragOverHandler(event);">
-			<div class="tab" title="example.pdb">
-				<span class="filename">example.pdb</span>
-				<span class="closebtn">&cross;</span>
-			</div>
-		</div>
+		<div id="tabs" ondrop="tabBarDropHandler(event);" ondragover="tabBarDragOverHandler(event);"></div>
 		<div id="editor"></div>
 	</body>
 </html>
