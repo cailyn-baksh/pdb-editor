@@ -1,39 +1,119 @@
+:root {
+	/* Light Theme */
+	--light-text-color: #000;
+
+	--light-menu-bg-color: #ddd;
+	--light-menu-hover-bg-color: #aaa;
+	--light-menu-shortcut-text-color: #444;
+	--light-menu-separator-color: #bbb;
+
+	--light-tabs-bg-color: #eee;
+	--light-tab-bg-color: #bbb;
+	--light-tab-sel-bg-color: #ccc;
+	--light-tab-sep-color: #777;
+
+	--light-editor-bg-color: #fff;
+	--light-lineno-text-color: #666;
+
+	--light-status-bg-color: #ddd;
+
+	/* Dark Theme */
+	--dark-text-color: #fff;
+
+	--dark-menu-bg-color: #444;
+	--dark-hover-bg-color: #777;
+	--dark-shortcut-text-color: #bbb;
+	--dark-separator-color: #666;
+
+	--dark-tabs-bg-color: #666;
+	--dark-tab-bg-color: #444;
+	--dark-tab-sel-bg-color: #888;
+	--dark-tab-sep-color: #777;
+
+	--dark-editor-bg-color: #000;
+	--dark-editor-lineno-text-color: #ccc;
+
+	--dark-status-bg-color: #444;
+}
+
 /* Light Theme */
 body.light {
-	--text-color: #000;
+	--text-color: var(--light-text-color);
 
-	--menu-bg-color: #ddd;
-	--menu-hover-bg-color: #aaa;
-	--menu-shortcut-text-color: #444;
-	--menu-separator-color: #bbb;
+	--menu-bg-color: var(--light-menu-bg-color);
+	--menu-hover-bg-color: var(--light-menu-hover-bg-color);
+	--menu-shortcut-text-color: var(--light-menu-shortcut-text-color);
+	--menu-separator-color: var(--light-menu-separator-color);
 
-	--tabs-bg-color: #eee;
-	--tab-bg-color: #bbb;
-	--tab-sel-bg-color: #ccc;
-	--tab-sep-color: #777;
+	--tabs-bg-color: var(--light-tabs-bg-color);
+	--tab-bg-color: var(--light-tab-bg-color);
+	--tab-sel-bg-color: var(--light-tab-sel-bg-color);
+	--tab-sep-color: var(--light-tab-sep-color);
 
-	--editor-bg-color: #fff;
-	--editor-lineno-text-color: #666;
+	--editor-bg-color: var(--light-editor-bg-color);
+	--editor-lineno-text-color: var(--light-editor-lineno-text-color);
 
-	--status-bg-color: #ddd;
+	--status-bg-color: var(--light-status-bg-color);
+}
+
+@media (prefers-color-scheme: light) {
+	body.preferred {
+		--text-color: var(--light-text-color);
+	
+		--menu-bg-color: var(--light-menu-bg-color);
+		--menu-hover-bg-color: var(--light-menu-hover-bg-color);
+		--menu-shortcut-text-color: var(--light-menu-shortcut-text-color);
+		--menu-separator-color: var(--light-menu-separator-color);
+	
+		--tabs-bg-color: var(--light-tabs-bg-color);
+		--tab-bg-color: var(--light-tab-bg-color);
+		--tab-sel-bg-color: var(--light-tab-sel-bg-color);
+		--tab-sep-color: var(--light-tab-sep-color);
+	
+		--editor-bg-color: var(--light-editor-bg-color);
+		--editor-lineno-text-color: var(--light-editor-lineno-text-color);
+	
+		--status-bg-color: var(--light-status-bg-color);
+	}
 }
 
 /* Dark Theme */
 body.dark {
-	--text-color: #fff;
+	--text-color: var(--dark-text-color);
 
-	--menu-bg-color: #444;
-	--menu-hover-bg-color: #777;
-	--menu-shortcut-text-color: #bbb;
-	--menu-separator-color: #666;
+	--menu-bg-color: var(--dark-menu-bg-color);
+	--menu-hover-bg-color: var(--dark-menu-hover-bg-color);
+	--menu-shortcut-text-color: var(--dark-menu-shortcut-text-color);
+	--menu-separator-color: var(--dark-menu-separator-color);
 
-	--tabs-bg-color: #666;
-	--tab-bg-color: #444;
-	--tab-sel-bg-color: #888;
-	--tab-sep-color: #777;
+	--tabs-bg-color: var(--dark-tabs-bg-color);
+	--tab-bg-color: var(--dark-tab-bg-color);
+	--tab-sel-bg-color: var(--dark-tab-sel-bg-color);
+	--tab-sep-color: var(--dark-tab-sep-color);
 
-	--editor-bg-color: #000;
-	--editor-lineno-text-color: #ccc;
+	--editor-bg-color: var(--dark-editor-bg-color);
+	--editor-lineno-text-color: var(--dark-editor-lineno-text-color);
 
-	--status-bg-color: #444;
+	--status-bg-color: var(--dark-status-bg-color);
+}
+
+@media (prefers-color-scheme: dark) {
+	body.preferred {
+		--text-color: var(--dark-text-color);
+	
+		--menu-bg-color: var(--dark-menu-bg-color);
+		--menu-hover-bg-color: var(--dark-menu-hover-bg-color);
+		--menu-shortcut-text-color: var(--dark-menu-shortcut-text-color);
+		--menu-separator-color: var(--dark-menu-separator-color);
+	
+		--tabs-bg-color: var(--dark-tabs-bg-color);
+		--tab-bg-color: var(--dark-tab-bg-color);
+		--tab-sel-bg-color: var(--dark-tab-sel-bg-color);
+		--tab-sep-color: var(--dark-tab-sep-color);
+	
+		--editor-bg-color: var(--dark-editor-bg-color);
+		--editor-lineno-text-color: var(--dark-editor-lineno-text-color);
+	
+		--status-bg-color: var(--dark-status-bg-color);
+	}
 }
