@@ -5,12 +5,21 @@
 
 		<link rel="stylesheet" href="/style/menu.css" />
 		<link rel="stylesheet" href="/style/tabs.css" />
+		<link rel="stylesheet" href="/style/editor.css" />
+		<link rel="stylesheet" href="/style/statusbar.css" />
 
 		<script src="/js/editor.js"></script>
 
 		<style>
+			html {
+				height: 100%;
+			}
+
 			body {
+				height: 100%;
 				margin: 0;
+				display: flex;
+				flex-direction: column;
 			}
 		</style>
 
@@ -70,7 +79,11 @@
 			</ul>
 		</div>
 		<div id="tabs"></div>
-		<div id="editor" contenteditable="true"></div>
+		<div id="editor">
+			<div class="line">Line 1</div>
+			<div class="line">Line 2</div>
+		</div>
+		<div id="statusbar"></div>
 	</body>
 </html>
 

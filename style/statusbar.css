@@ -1,0 +1,10 @@
+@import "/style/themes.css";
+
+div#statusbar {
+	background-color: var(--status-bg-color);
+	height: 15px;
+
+	position: relative;
+	bottom: 0;
+}
+

@@ -11,6 +11,11 @@ body.light {
 	--tab-bg-color: #bbb;
 	--tab-sel-bg-color: #ccc;
 	--tab-sep-color: #777;
+
+	--editor-bg-color: #fff;
+	--editor-lineno-text-color: #666;
+
+	--status-bg-color: #ddd;
 }
 
 /* Dark Theme */
@@ -26,4 +31,9 @@ body.dark {
 	--tab-bg-color: #444;
 	--tab-sel-bg-color: #888;
 	--tab-sep-color: #777;
+
+	--editor-bg-color: #000;
+	--editor-lineno-text-color: #ccc;
+
+	--status-bg-color: #444;
 }
