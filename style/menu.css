@@ -8,6 +8,7 @@ div#menu {
 	width: 100vw;
 	display: table;
 	background-color: var(--menu-bg-color);
+	color: var(--text-color);
 }
 
 div#menu a {
@@ -27,7 +28,6 @@ div#menu li {
 div#menu li > span.text {
 	float: left;
 	margin-right: 35px;
-	color: var(--text-color);
 }
 
 div#menu li > span.shortcut {
