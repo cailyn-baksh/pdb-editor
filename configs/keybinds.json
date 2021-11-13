@@ -1,0 +1,18 @@
+{
+	"New": ["Ctrl-N", "New"],
+	"Open": ["Ctrl-O"],
+	"Save": ["Ctrl-S"],
+
+	"Undo": ["Ctrl-Z", "Undo"],
+	"Redo": ["Ctrl-Shift-Z", "Redo"],
+
+	"Cut": ["Ctrl-X", "Cut"],
+	"Copy": ["Ctrl-C", "Copy"],
+	"Paste": ["Ctrl-V", "Paste"],
+
+	"Find": ["Ctrl-F"],
+	"Replace": ["Ctrl-H"],
+	
+	"Help": ["F1"]
+}
+
