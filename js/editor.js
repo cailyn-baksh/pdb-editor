@@ -1,6 +1,55 @@
 var editors = [];
 var activeEditor = 0;
 
+class StringByteReader {
+	#str = "";
+	#index = 0;
+	#buffer = [];
+
+	constructor(str) {
+		this.#str = str;
+	}
+
+	getNBytes(n) {
+		let bytes = [];
+
+		while (this.#buffer.length > 0 && bytes.length < n) {
+			bytes.push(this.#buffer.shift());
+		}
+
+		while (bytes.length < n && this.#index < this.#str.length) {
+			let char = this.#str.charCodeAt(this.#index);
+
+			if (char < 0x100) {
+				bytes.push(char);
+			} else {
+				while (char > 0) {
+					if (bytes.length < n) {
+						bytes.push((char & 0xFF) >>> 0);
+					} else {
+						this.#buffer.push((char & 0xFF) >>> 0);
+					}
+					char = char >>> 8;
+				}
+			}
+
+			++this.#index;
+		}
+
+		return bytes;
+	}
+}
+
+function fletcher64(data) {
+	let byteReader = new StringByteReader(data);
+	let sum1 = 0;
+	let sum2 = 0;
+
+	for (let i=0; i < data.length; ++i) {
+		
+	}	
+}
+
 class PDBEditor {
 	fileName;
 	#content = "";
@@ -15,6 +64,20 @@ class PDBEditor {
 	async readFile(file) {
 		// TODO: read stream and buffer the file
 		this.#content = await file.text().then(text => text.split('\n'));
+	}
+
+	renderContent() {
+		let rendered = "";
+
+		if (this.#content.length > 0) {
+			for (const line of this.#content) {
+				rendered += `<div class="line" tabindex="0"><span>${line}<br></span></div>`;
+			}
+		} else {
+			rendered += '<div class="line" tabindex="0"><span><br></span></div>';
+		}
+
+		return rendered;
 	}
 
 	createTabElement() {
@@ -40,7 +103,7 @@ class PDBEditor {
 		// Handle tab click
 		element.onclick = function(e) {
 			activeEditor = Number(this.id);
-			updateTabList();
+			updateTabs();
 		};
 
 		// Handle close button click
@@ -49,7 +112,7 @@ class PDBEditor {
 			editors.splice(index, 1);
 			activeEditor -= activeEditor !== 0 ? 1 : 0;
 
-			updateTabList();
+			updateTabs();
 			e.stopPropagation();
 		}
 	
@@ -57,8 +120,9 @@ class PDBEditor {
 	}
 }
 
-function updateTabList() {
+function updateTabs() {
 	let tabList = document.getElementById("tabs");
+	let editor = document.getElementById("editor");
 	tabList.innerHTML = "";
 
 	for (let i=0; i < editors.length; ++i) {
@@ -71,11 +135,17 @@ function updateTabList() {
 
 		tabList.append(tab);
 	}
+
+	if (activeEditor < editors.length) {
+		editor.innerHTML = editors[activeEditor].renderContent();
+	} else {
+		editor.innerHTML = "";
+	}
 }
 
 function newFile() {
 	editors.push(new PDBEditor("Untitled"));
-	updateTabList();
+	updateTabs();
 }
 
 document.addEventListener("DOMContentLoaded", function(e) {
@@ -94,6 +164,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 			editors.push(newEditor);
 		}
 
-		updateTabList();
+		updateTabs();
 	});
 });
+

@@ -14,6 +14,7 @@ body.light {
 
 	--editor-bg-color: #fff;
 	--editor-lineno-text-color: #666;
+	--editor-line-sel-border: #666;
 
 	--status-bg-color: #ddd;
 }
@@ -34,6 +35,7 @@ body.light {
 	
 		--editor-bg-color: #fff;
 		--editor-lineno-text-color: #666;
+		--editor-line-sel-border:  #666;
 	
 		--status-bg-color: #ddd;
 	}
