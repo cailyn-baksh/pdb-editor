@@ -2,52 +2,62 @@ var editors = [];
 var activeEditor = 0;
 
 class StringByteReader {
-	#str = "";
-	#index = 0;
-	#buffer = [];
+	#bytes = [];  // little-endian
 
 	constructor(str) {
-		this.#str = str;
-	}
+		for (let i=0; i < str.length; ++i) {
+			let ch = str.charCodeAt(i);
 
-	getNBytes(n) {
-		let bytes = [];
-
-		while (this.#buffer.length > 0 && bytes.length < n) {
-			bytes.push(this.#buffer.shift());
-		}
-
-		while (bytes.length < n && this.#index < this.#str.length) {
-			let char = this.#str.charCodeAt(this.#index);
-
-			if (char < 0x100) {
-				bytes.push(char);
+			if (ch < 0x100) {
+				this.#bytes.push(ch);
 			} else {
-				while (char > 0) {
-					if (bytes.length < n) {
-						bytes.push((char & 0xFF) >>> 0);
-					} else {
-						this.#buffer.push((char & 0xFF) >>> 0);
-					}
-					char = char >>> 8;
+				// multi-byte sequences are pushed in big-endian order to preserve logical byte ordering
+				let multiByteSequence = [];
+				while (ch > 0) {
+					multiByteSequence.push((ch & 0xFF) >>> 0);
+					ch >>>= 8;
+				}
+
+				for (let i=multiByteSequence.length-1; i >= 0; --i) {
+					this.#bytes.push(multiByteSequence[i]);
 				}
 			}
+		}
+	}
 
-			++this.#index;
+	*yieldBytes(n) {
+		let reducer = (prev, cur, index) => ((cur << (8 * index)) >>> 0) | prev;
+		let result = [];
+		for (let i=0; i < this.#bytes.length; ++i) {
+			result.push(this.#bytes[i]);
+
+			if (result.length === n) {
+				let value = result.reduce(reducer, 0);
+				result = [];
+				yield value;
+			}
 		}
 
-		return bytes;
+		while (result.length !== n) {
+			result.push(0);
+		}
+
+		yield result.reduce(reducer, 0);
 	}
 }
 
+// im not confident that this works right but i cant prove that its wrong
 function fletcher64(data) {
 	let byteReader = new StringByteReader(data);
 	let sum1 = 0;
 	let sum2 = 0;
 
-	for (let i=0; i < data.length; ++i) {
-		
-	}	
+	for (const dword of byteReader.yieldBytes(4)) {
+		sum1 = (sum1 + dword) % 0xFFFFFFFF;
+		sum2 = (sum2 + sum1) % 0xFFFFFFFF;
+	}
+
+	return ((sum2 << 32) | sum1) >>> 0;
 }
 
 class PDBEditor {
