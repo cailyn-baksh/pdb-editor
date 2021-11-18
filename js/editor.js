@@ -63,6 +63,7 @@ function fletcher64(data) {
 class PDBEditor {
 	fileName;
 	#content = "";
+	#lines = [];
 
 	constructor(name) {
 		this.fileName = name;
@@ -73,15 +74,19 @@ class PDBEditor {
 	 */
 	async readFile(file) {
 		// TODO: read stream and buffer the file
-		this.#content = await file.text().then(text => text.split('\n'));
+		let content = await file.text();
+
+		for (const line of content.split('\n')) {
+			this.#lines.push({content: line, checksum: fletcher64(line)});
+		}
 	}
 
 	renderContent() {
 		let rendered = "";
 
-		if (this.#content.length > 0) {
-			for (const line of this.#content) {
-				rendered += `<div class="line" tabindex="0"><span>${line}<br></span></div>`;
+		if (this.#lines.length > 0) {
+			for (const line of this.#lines) {
+				rendered += `<div class="line" tabindex="0"><span>${line.content}<br></span></div>`;
 			}
 		} else {
 			rendered += '<div class="line" tabindex="0"><span><br></span></div>';
