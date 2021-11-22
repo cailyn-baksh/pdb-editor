@@ -163,8 +163,32 @@ function newFile() {
 	updateTabs();
 }
 
+/*
+ * Upload a file from the file upload dialog
+ */
+function openFileUploadDialog() {
+	document.getElementById("file-upload").click();
+}
+
 document.addEventListener("DOMContentLoaded", function(e) {
 	let tabs = document.getElementById("tabs");
+	let fileUpload = document.getElementById("file-upload");
+
+	// Load files uploaded from the dialog
+	fileUpload.addEventListener("change", async function(e) {
+		if (fileUpload.files.length !== 0) {
+			for (const file of fileUpload.files) {
+				// upload file
+				let newEditor = new PDBEditor(file.name);
+				await newEditor.readFile(file);
+				editors.push(newEditor);
+			}
+
+			updateTabs();
+		}
+
+		fileUpload.value = null;
+	});
 
 	// Load file on drag'n'drop
 	tabs.addEventListener("dragover", function(e) {

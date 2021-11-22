@@ -1,21 +1,21 @@
 {
 	"version": 1.0,
 	"binds": {
-		"New": ["Ctrl-Shift-N", "New"],
-		"Open": ["Ctrl-O"],
-		"Save": ["Ctrl-S"],
+		"new": ["Ctrl-Shift-N", "New"],
+		"open": ["Ctrl-O"],
+		"save": ["Ctrl-S"],
 
-		"Undo": ["Ctrl-Z", "Undo"],
-		"Redo": ["Ctrl-Shift-Z", "Redo"],
+		"undo": ["Ctrl-Z", "Undo"],
+		"redo": ["Ctrl-Shift-Z", "Redo"],
 
-		"Cut": ["Ctrl-X", "Cut"],
-		"Copy": ["Ctrl-C", "Copy"],
-		"Paste": ["Ctrl-V", "Paste"],
+		"cut": ["Ctrl-X", "Cut"],
+		"copy": ["Ctrl-C", "Copy"],
+		"paste": ["Ctrl-V", "Paste"],
 
-		"Find": ["Ctrl-F"],
-		"Replace": ["Ctrl-H"],
+		"find": ["Ctrl-F"],
+		"replace": ["Ctrl-H"],
 
-		"Help": ["F1"]
+		"help": ["F1"]
 	}
 }
 

@@ -8,8 +8,8 @@ body.light {
 	--menu-separator-color: #bbb;
 
 	--tabs-bg-color: #eee;
-	--tab-bg-color: #bbb;
-	--tab-sel-bg-color: #ccc;
+	--tab-bg-color: #ccc;
+	--tab-sel-bg-color: #bbb;
 	--tab-sep-color: #777;
 
 	--editor-bg-color: #fff;
@@ -29,8 +29,8 @@ body.light {
 		--menu-separator-color: #bbb;
 	
 		--tabs-bg-color: #eee;
-		--tab-bg-color: #bbb;
-		--tab-sel-bg-color: #ccc;
+		--tab-bg-color: #ccc;
+		--tab-sel-bg-color: #bbb;
 		--tab-sep-color: #777;
 	
 		--editor-bg-color: #fff;
@@ -51,12 +51,13 @@ body.dark {
 	--menu-separator-color: #666;
 
 	--tabs-bg-color: #666;
-	--tab-bg-color: #444;
-	--tab-sel-bg-color: #888;
+	--tab-bg-color: #888;
+	--tab-sel-bg-color: #444;
 	--tab-sep-color: #777;
 
 	--editor-bg-color: #000;
 	--editor-lineno-text-color: #ccc;
+	--editor-line-sel-border: #ccc;
 
 	--status-bg-color: #444;
 }
@@ -71,12 +72,13 @@ body.dark {
 		--menu-separator-color: #666;
 	
 		--tabs-bg-color: #666;
-		--tab-bg-color: #444;
-		--tab-sel-bg-color: #888;
+		--tab-bg-color: #888;
+		--tab-sel-bg-color: #444;
 		--tab-sep-color: #777;
 	
 		--editor-bg-color: #000;
 		--editor-lineno-text-color: #ccc;
+		--editor-line-sel-border: #ccc;
 	
 		--status-bg-color: #444;
 	}

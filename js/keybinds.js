@@ -140,10 +140,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		let editorEvent = editorEventFromKeypress(e);
 
 		switch (editorEvent) {
-			case 'New':
+			case 'new':
 				newFile();
 				break;
-			case 'Save':
+			case 'open':
+				openFileUploadDialog();
+				break;
+			case 'save':
 				break;
 			default:
 				return;
