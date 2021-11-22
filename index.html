@@ -45,9 +45,9 @@
 				<li>
 					<span class="accelerator">F</span>ile
 					<ul>
-						<li onclick="newFile();"><span class="text"><span class="accelerator">N</span>ew File</span><span class="shortcut">Ctrl-N</span></li>
-						<li><span class="text"><span class="accelerator">O</span>pen</span><span class="shortcut">Ctrl-O</span></li>
-						<li><span class="text"><span class="accelerator">S</span>ave</span><span class="shortcut">Ctrl-S</span></li>
+						<li onclick="newFile();"><span class="text"><span class="accelerator">N</span>ew File</span><span class="shortcut" id="New"></span></li>
+						<li><span class="text"><span class="accelerator">O</span>pen</span><span class="shortcut" id="Open"></span></li>
+						<li><span class="text"><span class="accelerator">S</span>ave</span><span class="shortcut" id="Save"></span></li>
 						<li class="separator"></li>
 						<li><span class="text"><span class="accelerator">P</span>references</span></li>
 					</ul>
@@ -55,21 +55,21 @@
 				<li>
 					<span class="accelerator">E</span>dit
 					<ul>
-						<li><span class="text"><span class="accelerator">U</span>ndo</span><span class="shortcut">Ctrl-Z</span></li>
-						<li><span class="text"><span class="accelerator">R</span>edo</span><span class="shortcut">Ctrl-Shift-Z</span></li>
+						<li><span class="text"><span class="accelerator">U</span>ndo</span><span class="shortcut" id="Undo"></span></li>
+						<li><span class="text"><span class="accelerator">R</span>edo</span><span class="shortcut" id="Redo"></span></li>
 						<li class="separator"></li>
-						<li><span class="text">Cu<span class="accelerator">t</span></span><span class="shortcut">Ctrl-X</span></li>
-						<li><span class="text"><span class="accelerator">C</span>opy</span><span class="shortcut">Ctrl-C</span></li>
-						<li><span class="text"><span class="accelerator">P</span>aste</span><span class="shortcut">Ctrl-V</span></li>
+						<li><span class="text">Cu<span class="accelerator">t</span></span><span class="shortcut" id="Cut"></span></li>
+						<li><span class="text"><span class="accelerator">C</span>opy</span><span class="shortcut" id="Copy"></span></li>
+						<li><span class="text"><span class="accelerator">P</span>aste</span><span class="shortcut"id="Paste"></span></li>
 						<li class="separator"></li>
-						<li><span class="text"><span class="accelerator">F</span>ind</span><span class="shortcut">Ctrl-F</span></li>
-						<li><span class="text"><span class="accelerator">R</span>eplace</span><span class="shortcut">Ctrl-H</span></li>
+						<li><span class="text"><span class="accelerator">F</span>ind</span><span class="shortcut" id="Find"></span></li>
+						<li><span class="text"><span class="accelerator">R</span>eplace</span><span class="shortcut" id="Replace"></span></li>
 					</ul>
 				</li>
 				<li>
 					<span class="accelerator">H</span>elp
 					<ul>
-						<li><span class="text"><span class="accelerator">E</span>ditor Help</span><span class="shortcut">F1</span></li>
+						<li><span class="text"><span class="accelerator">E</span>ditor Help</span><span class="shortcut" id="Help"></span></li>
 						<li><span class="text">PDB <span class="accelerator">F</span>ormat Docs</span></li>
 						<li class="separator"></li>
 						<li><span class="text"><a id="report-bug" href="https://github.com/cailyn-baksh/pdb-editor/issues/new?title=Bug+Report" target="_blank">Report a <span class="accelerator">B</span>ug</span></a></li>
@@ -78,6 +78,7 @@
 					</ul>
 				</li>
 			</ul>
+			<div id="menu-end"></div>
 		</div>
 		<div id="tabs"></div>
 		<div id="editor" contenteditable>

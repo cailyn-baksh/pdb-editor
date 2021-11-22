@@ -24,12 +24,32 @@ function editorEventFromKeypress(keyboardEvent) {
 	if (keyboardEvent.metaKey) modByte |= 8;
 	if (chord) modByte |= 16;
 
-	let keyHash = String.fromCharCode(modByte) + keyboardEvent.key;
+	let keyHash = String.fromCharCode(modByte) + keyboardEvent.key.toLocaleUpperCase();
 
 	if (keyHash in keybinds) {
-		return keybinds[keyHash];
+		return keybinds[keyHash].event;
 	}
 	return null;
+}
+
+function unhashKeybind(keybind) {
+	let str = "";
+	let modByte = keybind.charCodeAt(0);
+
+	if (modByte & 1) str += "Ctrl-";
+	if (modByte & 2) str += "Alt-";
+	if (modByte & 4) str += "Shift-";
+	if (modByte & 8) {
+		if (navigator.userAgentData.platform.indexOf('Win') > -1) {
+			str += "Win-"
+		} else if (navigator.userAgentData.platform.indexOf('Mac') > -1) {
+			str += "⌘-";
+		} else {
+			str += "Meta-";
+		}
+	}
+
+	return str + keybind.slice(1);
 }
 
 /*
@@ -49,9 +69,9 @@ function editorEventFromKeypress(keyboardEvent) {
 		}).then(response => response.json());
 
 		// Hash each key
-		for (const [event, bindings] of Object.entries(rawBinds)) {
-			for (const bind of bindings) {
-				let keys = bind.split('-');
+		for (const [event, bindings] of Object.entries(rawBinds.binds)) {
+			for (let i=0; i < bindings.length; ++i) {
+				let keys = bindings[i].split('-');
 				let modByte = 0;
 				let boundKey = "";
 
@@ -67,14 +87,36 @@ function editorEventFromKeypress(keyboardEvent) {
 					} else if (key.toLowerCase() === "chord") {
 						modByte |= 16;
 					} else {
-						boundKey = key;
+						boundKey = key.toLocaleUpperCase();
 					}
 
 				}
 
-				keybinds[String.fromCharCode(modByte) + boundKey] = event;
+				keybinds[String.fromCharCode(modByte) + boundKey] = {"event": event, "preferred": i === 0};
 			}
 		}
+	}
+
+	// Add shortcuts to menu
+	let addShortcutText = () => {
+		for (const [keybind, event] of Object.entries(keybinds)) {
+			let elem = document.querySelector(`div#menu span.shortcut#${event.event}`);
+			if (event.preferred) elem.innerHTML = unhashKeybind(keybind);
+		}
+	};
+
+	if (document.getElementById("menu-end")) {
+		addShortcutText();
+	} else {
+		let observer = new MutationObserver((mutations, instance) => {
+			if (document.getElementById("menu-end")) {  // menu has fully loaded
+				addShortcutText();	
+
+				instance.disconnect();
+			}
+		});
+
+		observer.observe(document, {subtree: true, childList: true});
 	}
 })();
 
@@ -82,14 +124,31 @@ document.addEventListener("DOMContentLoaded", () => {
 	document.addEventListener("keydown", (e) => {
 		let selection = document.getSelection();
 
-		console.log(e);
-
 		// Handle standard, non-rebindable keys
-		if (!e.altKey && !e.ctrlKey && !e.isComposing && !e.metaKey && !e.shiftKey) {
-			if (e.key === "Enter") {
-				console.log(selection.anchorNode);
+		static_keys: {
+			if (!e.altKey && !e.ctrlKey && !e.isComposing && !e.metaKey && !e.shiftKey) {
+				if (e.key === "Enter") {
+					console.log(selection.anchorNode);
+				} else {
+					break static_keys;  // allow processing of this key as a bound key
+				}
+				return;
 			}
 		}
+
+		// Handle bound keys
+		let editorEvent = editorEventFromKeypress(e);
+
+		switch (editorEvent) {
+			case 'New':
+				newFile();
+				break;
+			case 'Save':
+				break;
+			default:
+				return;
+		}
+		e.preventDefault();
 	});
 });
 

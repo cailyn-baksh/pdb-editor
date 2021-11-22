@@ -83,3 +83,7 @@ div#menu > ul > li > ul > li.separator {
 	border-bottom: 1px solid var(--menu-separator-color);
 	margin-bottom: 2px;
 }
+
+div#menu div#menu-end {
+	display: none;
+}
