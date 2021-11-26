@@ -95,6 +95,14 @@ class PDBEditor {
 		return rendered;
 	}
 
+	get raw() {
+		let rawContent = "";
+		for (const line of this.#lines) {
+			rawContent += `${line.content}\n`;
+		}
+		return rawContent;
+	}
+
 	createTabElement() {
 		// Create tab element
 		let element = document.createElement("div");
@@ -161,6 +169,15 @@ function updateTabs() {
 function newFile() {
 	editors.push(new PDBEditor("Untitled"));
 	updateTabs();
+}
+
+function saveFile() {
+	let content = new Blob([editors[activeEditor].raw], {type: "text/plain"});
+
+	let dl = document.createElement("a");
+	dl.href = URL.createObjectURL(content);
+	dl.download = editors[activeEditor].fileName;
+	dl.click();
 }
 
 /*

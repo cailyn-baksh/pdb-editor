@@ -147,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				openFileUploadDialog();
 				break;
 			case 'save':
+				saveFile();
 				break;
 			default:
 				return;
