@@ -1,6 +1,7 @@
 @import "/style/themes.css";
 
 div#tabs {
+	color: var(--text-color);
 	background-color: var(--tabs-bg-color);
 	height: 50px;
 	max-height: 50px;

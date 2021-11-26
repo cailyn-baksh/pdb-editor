@@ -1,0 +1,52 @@
+@import "/style/themes.css";
+
+div.modal-container {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+
+	display: none;
+
+	background-color: var(--modal-container-color);
+}
+
+div.modal-container.visible {
+	display: flex;
+}
+
+div.modal {
+	position: relative;
+	margin: 5vh 10vw;
+	padding-top: 30px;
+
+	flex: 1;
+	display: flex;
+
+	color: var(--text-color);
+	background-color: var(--modal-bg-color);
+}
+
+div.modal div.modal-close {
+	display: block;
+	position: absolute;
+	top: 5px;
+	right: 10px;
+
+	cursor: pointer;
+}
+
+/* TODO: switch to image for close buttons */
+div.modal div.modal-close::after {
+	content: "x";
+	font-size: 12pt;
+	font-family: monospace;
+}
+
+div.modal div.content {
+	flex: 1;
+
+	padding: 25px;
+	padding-top: 0px;
+
+	overflow-y: scroll;
+}

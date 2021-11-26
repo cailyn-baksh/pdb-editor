@@ -17,6 +17,9 @@ body.light {
 	--editor-line-sel-border: #666;
 
 	--status-bg-color: #ddd;
+
+	--modal-container-color: #444a;
+	--modal-bg-color: #fff;
 }
 
 @media (prefers-color-scheme: light) {
@@ -38,6 +41,9 @@ body.light {
 		--editor-line-sel-border:  #666;
 	
 		--status-bg-color: #ddd;
+
+		--modal-container-color: #444a;
+		--modal-bg-color: #fff;
 	}
 }
 
@@ -50,16 +56,19 @@ body.dark {
 	--menu-shortcut-text-color: #bbb;
 	--menu-separator-color: #666;
 
-	--tabs-bg-color: #666;
-	--tab-bg-color: #888;
-	--tab-sel-bg-color: #444;
-	--tab-sep-color: #777;
+	--tabs-bg-color: #444;
+	--tab-bg-color: #333;
+	--tab-sel-bg-color: #1a1a1a;
+	--tab-sep-color: #444;
 
-	--editor-bg-color: #000;
-	--editor-lineno-text-color: #ccc;
-	--editor-line-sel-border: #ccc;
+	--editor-bg-color: #1a1a1a;
+	--editor-lineno-text-color: #999;
+	--editor-line-sel-border: #999;
 
 	--status-bg-color: #444;
+
+	--modal-container-color: #444a;
+	--modal-bg-color: #1a1a1a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -71,15 +80,18 @@ body.dark {
 		--menu-shortcut-text-color: #bbb;
 		--menu-separator-color: #666;
 	
-		--tabs-bg-color: #666;
-		--tab-bg-color: #888;
-		--tab-sel-bg-color: #444;
-		--tab-sep-color: #777;
+		--tabs-bg-color: #444;
+		--tab-bg-color: #333;
+		--tab-sel-bg-color: #1a1a1a;
+		--tab-sep-color: #444;
 	
-		--editor-bg-color: #000;
-		--editor-lineno-text-color: #ccc;
-		--editor-line-sel-border: #ccc;
+		--editor-bg-color: #1a1a1a;
+		--editor-lineno-text-color: #999;
+		--editor-line-sel-border: #999;
 	
 		--status-bg-color: #444;
+
+		--modal-container-color: #444a;
+		--modal-bg-color: #1a1a1a;
 	}
 }

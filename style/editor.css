@@ -10,6 +10,7 @@ div#editor {
 	display: flex;
 	flex-direction: column;
 
+	color: var(--text-color);
 	background-color: var(--editor-bg-color);
 }
 

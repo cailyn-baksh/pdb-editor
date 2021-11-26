@@ -7,6 +7,8 @@
 		<link rel="stylesheet" href="/style/tabs.css" />
 		<link rel="stylesheet" href="/style/editor.css" />
 		<link rel="stylesheet" href="/style/statusbar.css" />
+		<link rel="stylesheet" href="/style/modal.css" />
+		<link rel="stylesheet" href="/style/togglebtn.css" />
 
 		<script src="/js/editor.js"></script>
 		<script src="/js/keybinds.js"></script>
@@ -30,7 +32,19 @@
 			}
 
 			function selectTheme() {
-				document.body.classList += window.localStorage.getItem("theme");
+				let theme = window.localStorage.getItem("theme");
+				document.body.classList = theme;
+				document.getElementById("theme-select").value = theme;
+			}
+
+			function updateTheme() {
+				let newTheme = document.getElementById("theme-select").value;
+				window.localStorage.setItem("theme", newTheme);
+				document.body.classList = newTheme; 
+			}
+
+			function toggleModal(modalName) {
+				document.getElementById(modalName).classList.toggle("visible");
 			}
 
 			document.addEventListener("DOMContentLoaded", () => {
@@ -51,7 +65,7 @@
 						<li class="separator"></li>
 						<li><span class="text"><span class="accelerator">C</span>lose Tab</span><span class="shortcut" id="tabclose"></span></li>
 						<li class="separator"></li>
-						<li><span class="text"><span class="accelerator">P</span>references</span></li>
+						<li onclick="toggleModal('preferences');"><span class="text"><span class="accelerator">P</span>references</span></li>
 					</ul>
 				</li>
 				<li>
@@ -84,12 +98,22 @@
 		</div>
 		<input id="file-upload" type="file" multiple style="display: none" />
 		<div id="tabs"></div>
-		<div id="editor" contenteditable>
-			<div class="line" tabindex=0><span>Line 1</span></div>
-			<div class="line" tabindex=0><span>Line 2</span></div>
-			<div class="line" tabindex=0><span><br></span></div>
-		</div>
+		<div id="editor" contenteditable spellcheck="false"></div>
 		<div id="statusbar"></div>
+		<div class="modal-container" id="preferences">
+			<div class="modal">
+				<div class="modal-close" onclick="toggleModal('preferences');"></div>
+				<div class="content">
+					<div>Theme
+						<select id="theme-select" onchange="updateTheme();">
+							<option value="preferred">Use System Preference</option>
+							<option value="light">Light</option>
+							<option value="dark">Dark</option>
+						</select>
+					</div>
+				</div>	
+			</div>
+		</div>
 	</body>
 </html>
 

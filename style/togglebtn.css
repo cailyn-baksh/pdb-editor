@@ -1,0 +1,53 @@
+input[type="checkbox"].togglebtn {
+    display: none;
+}
+
+label.togglebtn {
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    border-radius: 20px;
+    vertical-align: middle;
+    margin: 0px 10px;
+    text-align: center;
+
+	background-color: #ec7a7a;
+}
+
+label.togglebtn > span.indicator {
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    height: 25px;
+    width: 25px;
+    top: -2.5px;
+    left: -10px;
+
+	background-color: #da3e3e;
+
+    box-shadow: 2px 2px 4px #444;
+
+    transition: left 200ms ease-out;
+}
+
+input.togglebtn:checked + label.togglebtn > span.indicator {
+    left: 10px;
+	background-color: #63cf71;
+}
+
+input.togglebtn:checked + label.togglebtn:not(.disabled).conditional ~ label.conditional.off,
+input.togglebtn:not(:checked) + label.togglebtn.conditional ~ label.conditional.on {
+    display: none;
+}
+
+input.togglebtn:checked + label.togglebtn:not(.disabled) {
+    background-color: #a2dfaa;
+}
+
+label.togglebtn.disabled {
+    background-color: #a3a3a3;
+}
+
+label.togglebtn.disabled > span.indicator {
+    background-color: #7c7c7c !important;
+}
