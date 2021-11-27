@@ -98,13 +98,16 @@
 		</div>
 		<input id="file-upload" type="file" multiple style="display: none" />
 		<div id="tabs"></div>
-		<div id="editor" contenteditable spellcheck="false"></div>
+		<div id="editor" contenteditable spellcheck="false">
+			<div class="line" tabindex="0"><span><br></span></div>  
+		</div>
 		<div id="statusbar"></div>
 		<div class="modal-container" id="preferences">
 			<div class="modal">
 				<div class="modal-close" onclick="toggleModal('preferences');"></div>
 				<div class="content">
-					<div>Theme
+					<div>
+						<label for="theme-select">Theme</label>
 						<select id="theme-select" onchange="updateTheme();">
 							<option value="preferred">Use System Preference</option>
 							<option value="light">Light</option>

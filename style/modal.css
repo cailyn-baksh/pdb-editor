@@ -50,3 +50,7 @@ div.modal div.content {
 
 	overflow-y: scroll;
 }
+
+div.modal div.content label {
+	margin-right: 25px;
+}

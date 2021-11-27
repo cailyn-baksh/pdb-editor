@@ -5,7 +5,15 @@ div#tabs {
 	background-color: var(--tabs-bg-color);
 	height: 50px;
 	max-height: 50px;
-	overflow: hidden;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	white-space: nowrap;
+	scrollbar-width: none;  /* standard method */
+}
+
+div#tabs::-webkit-scrollbar { /* webkit method */
+	width: 0;
+	height: 0;
 }
 
 div#tabs div.tab {
@@ -17,7 +25,7 @@ div#tabs div.tab {
 	position: relative;
 	padding: 0px 10px;
 	cursor: pointer;
-	float: left;
+	display: inline-block;
 	background-color: var(--tab-bg-color);
 }
 
@@ -35,9 +43,11 @@ div#tabs div.tab span.filename {
 	max-width: 115px;
 	mask-size: 115px;
 	mask-image: linear-gradient(90deg, #000f 75%, transparent);
+	font-family: sans-serif;
 }
 
 div#tabs div.tab span.closebtn {
 	float: right;
 	font-family: monospace;
+	user-select: none;
 }

@@ -103,6 +103,18 @@ class PDBEditor {
 		return rawContent;
 	}
 
+	get lineCount() {
+		return this.#lines.length;
+	}
+
+	updateLine(index, value) {
+		this.#lines[index].content = value;
+	}
+
+	insertLine(index, value) {
+		this.#lines.splice(index, 0, value);
+	}
+
 	createTabElement() {
 		// Create tab element
 		let element = document.createElement("div");
@@ -167,17 +179,23 @@ function updateTabs() {
 }
 
 function newFile() {
-	editors.push(new PDBEditor("Untitled"));
+	if (typeof newFile.counter == 'undefined') {
+		newFile.counter = 1;
+	}
+
+	editors.push(new PDBEditor(`Untitled ${newFile.counter++}`));
 	updateTabs();
 }
 
 function saveFile() {
-	let content = new Blob([editors[activeEditor].raw], {type: "text/plain"});
+	if (editors.length > 0) {
+		let content = new Blob([editors[activeEditor].raw], {type: "text/plain"});
 
-	let dl = document.createElement("a");
-	dl.href = URL.createObjectURL(content);
-	dl.download = editors[activeEditor].fileName;
-	dl.click();
+		let dl = document.createElement("a");
+		dl.href = URL.createObjectURL(content);
+		dl.download = editors[activeEditor].fileName;
+		dl.click();
+	}
 }
 
 /*
@@ -221,6 +239,12 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		}
 
 		updateTabs();
+	});
+
+	document.getElementById("editor").addEventListener("beforeinput", (e) => {
+		console.log(e);
+		console.log(e.getTargetRanges())
+		e.preventDefault();
 	});
 });
 

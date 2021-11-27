@@ -127,8 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Handle standard, non-rebindable keys
 		static_keys: {
 			if (!e.altKey && !e.ctrlKey && !e.isComposing && !e.metaKey && !e.shiftKey) {
-				if (e.key === "Enter") {
-					console.log(selection.anchorNode);
+				if (false) {
+					
 				} else {
 					break static_keys;  // allow processing of this key as a bound key
 				}
