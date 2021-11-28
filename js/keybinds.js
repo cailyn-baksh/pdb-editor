@@ -64,7 +64,7 @@ function unhashKeybind(keybind) {
 		keybinds = {};
 
 		// load from server
-		let rawBinds = await fetch("/configs/keybinds.json", {
+		let rawBinds = await fetch("../configs/keybinds.json", {
 			"mode": "same-origin"
 		}).then(response => response.json());
 

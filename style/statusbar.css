@@ -1,4 +1,4 @@
-@import "/style/themes.css";
+@import "themes.css";
 
 div#statusbar {
 	background-color: var(--status-bg-color);

@@ -1,4 +1,4 @@
-@import "/style/themes.css";
+@import "themes.css";
 
 div#tabs {
 	color: var(--text-color);
