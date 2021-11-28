@@ -63,7 +63,7 @@ function fletcher64(data) {
 class PDBEditor {
 	fileName;
 	#content = "";
-	#lines = [];
+	#lines = [[]];
 
 	constructor(name) {
 		this.fileName = name;
@@ -77,42 +77,30 @@ class PDBEditor {
 		let content = await file.text();
 
 		for (const line of content.split('\n')) {
-			this.#lines.push({content: line, checksum: fletcher64(line)});
+			this.#lines.push(line.split(''));
 		}
 	}
 
 	renderContent() {
 		let rendered = "";
 
-		if (this.#lines.length > 0) {
-			for (const line of this.#lines) {
-				rendered += `<div class="line" tabindex="0"><span>${line.content}<br></span></div>`;
-			}
-		} else {
-			rendered += '<div class="line" tabindex="0"><span><br></span></div>';
+		for (let i=0; i < this.#lines.length; ++i) {
+			rendered += `<div class="line" tabindex="0" id="${i}"><span>${this.#lines[i].join('')}<br></span></div>`;
 		}
 
 		return rendered;
 	}
 
 	get raw() {
-		let rawContent = "";
-		for (const line of this.#lines) {
-			rawContent += `${line.content}\n`;
-		}
-		return rawContent;
+		return this.#lines.map(c => c.join('')).join('');
 	}
 
-	get lineCount() {
-		return this.#lines.length;
+	getLine(index) {
+		return this.#lines[index].join('');
 	}
 
-	updateLine(index, value) {
-		this.#lines[index].content = value;
-	}
-
-	insertLine(index, value) {
-		this.#lines.splice(index, 0, value);
+	spliceLine(index, start, end, chars) {
+		this.#lines[index].splice(start, end - start, chars);
 	}
 
 	createTabElement() {
@@ -205,9 +193,18 @@ function openFileUploadDialog() {
 	document.getElementById("file-upload").click();
 }
 
+function verticalNearestElement(node) {
+	if (node.nodeType == Node.ELEMENT_NODE) {
+		return node;
+	} else {
+		return node.parentElement;
+	}
+}
+
 document.addEventListener("DOMContentLoaded", function(e) {
 	let tabs = document.getElementById("tabs");
 	let fileUpload = document.getElementById("file-upload");
+	let editor = document.getElementById("editor");
 
 	// Load files uploaded from the dialog
 	fileUpload.addEventListener("change", async function(e) {
@@ -241,10 +238,39 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		updateTabs();
 	});
 
-	document.getElementById("editor").addEventListener("beforeinput", (e) => {
-		console.log(e);
-		console.log(e.getTargetRanges())
+	editor.addEventListener("beforeinput", (e) => {
 		e.preventDefault();
+
+		let targetRange = e.getTargetRanges()[0];  // TODO: support multiple input
+		let container = targetRange.endContainer;
+		let lineId = verticalNearestElement(container).parentElement.id;
+
+		let selection = window.getSelection();
+		let range = document.createRange();
+
+		if (container.nodeType === Node.ELEMENT_NODE) {
+			if (container.firstChild.nodeType === Node.ELEMENT_NODE) {
+				let textNode = document.createTextNode('');
+				container.insertBefore(textNode, container.firstChild);
+				container = textNode;
+			} else {
+				container = container.firstChild;
+			}
+		}
+
+		if (e.inputType === "insertText") {
+			editors[activeEditor].spliceLine(lineId, targetRange.startOffset, targetRange.endOffset, e.data);
+			container.nodeValue = editors[activeEditor].getLine(lineId);
+
+			range.setStart(container, targetRange.startOffset + e.data.length);
+		} else if (e.inputType === "deleteContentBackward") {
+			editors[activeEditor].spliceLine(lineId, targetRange.startOffset, targetRange.endOffset, "");
+			container.nodeValue = editors[activeEditor].getLine(lineId);
+			range.setStart(container, targetRange.startOffset);
+		}
+
+		selection.removeAllRanges();
+		selection.addRange(range);
 	});
 });
 
