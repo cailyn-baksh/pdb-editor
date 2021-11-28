@@ -1,4 +1,4 @@
-@import "themes.css";
+@import "/pdb-editor/style/themes.css";
 
 div#statusbar {
 	background-color: var(--status-bg-color);
